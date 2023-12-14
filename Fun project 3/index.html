@@ -6,15 +6,56 @@
         <title>Random Password Generator</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        <script src="https://kit.fontawesome.com/42f00ac4ca.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <div class="password-cintainer">
             <h2>Random Password Generator</h2>
             <div class="input-container">
-                <input type="text"/>
+                <input type="text" id="input" class="input" placeholder="Create Password" readonly/>
+                <i class="fa-regular fa-copy fa-2xl"></i>
             </div>
+            <button class="btn">Generate</button>
         </div>
-        <script></script>
+        <div class="alart-container active">
+            Password Copied
+        </div>
+
+        <script>
+            const btnE1=document.querySelector(".btn");
+            const inputE1=document.getElementById("input");
+            const copyiconE1 = document.querySelector(".fa-copy");
+            const alertContainerEl = document.querySelector(".alert-container");
+
+            btnE1.addEventListener("click", () => {
+                createPassword();
+            });
+            copyiconE1.addEventListener("click", () => {
+                copyPassword();
+                if (inputE1.value) {
+                    alertContainerEl.classList.remove("active");
+                  setTimeout(() => {
+                    alertContainerEl.classList.add("active");
+                  }, 2000);
+                }
+            });
+            function createPassword() {
+                const chars ="0123456789abcdefghijklmnopqrstuvwxtz!@#$%^&*()_+?:{}[]ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                const passLength = 14;
+                let password = "";
+                for (let i = 0; i < passLength; i++) {
+                  const randomNum = Math.floor(Math.random() *chars.length);
+                  password += chars.substring(randomNum,randomNum + 1);
+                }
+                inputE1.value = password;
+                alertContainerEl.innerText = password + "copied!";
+            }
+            function copyPassword() {
+                inputE1.select();
+                inputE1.setSelectionRange(0, 9999);
+                navigator.clipboard.writeText(inputE1.value);
+            }
+        </script>
     </body>
 </html>
