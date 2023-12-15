@@ -18,8 +18,8 @@
             </div>
             <button class="btn">Generate</button>
         </div>
-        <div class="alart-container active">
-            Password Copied
+        <div class="alert-container">
+            
         </div>
 
         <script>
@@ -35,11 +35,14 @@
                 copyPassword();
                 if (inputE1.value) {
                     alertContainerEl.classList.remove("active");
-                  setTimeout(() => {
-                    alertContainerEl.classList.add("active");
-                  }, 2000);
+                    setTimeout(() => {
+                        alertContainerEl.classList.add("active");
+                    }, 10);
+                    setTimeout(() => {
+                        alertContainerEl.classList.remove("active");
+                    }, 2000);
                 }
-            });
+            });            
             function createPassword() {
                 const chars ="0123456789abcdefghijklmnopqrstuvwxtz!@#$%^&*()_+?:{}[]ABCDEFGHIJKLMNOPQRSTUVWXYZ";
                 const passLength = 14;
@@ -49,13 +52,15 @@
                   password += chars.substring(randomNum,randomNum + 1);
                 }
                 inputE1.value = password;
-                alertContainerEl.innerText = password + "copied!";
             }
             function copyPassword() {
                 inputE1.select();
                 inputE1.setSelectionRange(0, 9999);
                 navigator.clipboard.writeText(inputE1.value);
+                
+                alertContainerEl.innerText = "Password Copied!";
             }
+            
         </script>
     </body>
 </html>

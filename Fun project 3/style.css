@@ -58,6 +58,6 @@ body{
     transform: scale(0.95);
 }
 
-.active.alart-container{
-    right:-300px;
+.active.alert-container {
+    right: -300px;
 }
