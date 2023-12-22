@@ -1,78 +1,72 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Calculator</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <link rel="stylesheet" href="style.css">
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Calculator</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div align="center" class="calculator">
+        <form name="form">
+            <input type="text" name="display" class="form form-control" value="" placeholder="0" aria-live="assertive">
+            <div class="buttons">
+                <button type="button" class="btn btn-outline-primary" value="1" onclick="buttonfunction(this.value)">1</button>
+                <button type="button" class="btn btn-outline-primary" value="2" onclick="buttonfunction(this.value)">2</button>
+                <button type="button" class="btn btn-outline-primary" value="3" onclick="buttonfunction(this.value)">3</button>
+                <button type="button" class="btn btn-outline-primary" value="+" onclick="buttonfunction(this.value)" aria-label="Addition">+</button>
+                <br>
+                <button type="button" class="btn btn-outline-primary" value="4" onclick="buttonfunction(this.value)">4</button>
+                <button type="button" class="btn btn-outline-primary" value="5" onclick="buttonfunction(this.value)">5</button>
+                <button type="button" class="btn btn-outline-primary" value="6" onclick="buttonfunction(this.value)">6</button>
+                <button type="button" class="btn btn-outline-primary" value="-" onclick="buttonfunction(this.value)">-</button>
+                <br>
+                <button type="button" class="btn btn-outline-primary" value="7" onclick="buttonfunction(this.value)">7</button>
+                <button type="button" class="btn btn-outline-primary" value="8" onclick="buttonfunction(this.value)">8</button>
+                <button type="button" class="btn btn-outline-primary" value="9" onclick="buttonfunction(this.value)">9</button>
+                <button type="button" class="btn btn-outline-primary" value="*" onclick="buttonfunction(this.value)" aria-label="Multiplication">*</button>
+                <br>
+                <button type="button" class="btn btn-outline-primary" onclick="equal()" aria-label="Equals">=</button>
+                <button type="button" class="btn btn-outline-primary" onclick="clearScreen()" aria-label="Clear">C</button>
+                <button type="button" class="btn btn-outline-primary" value="0" onclick="buttonfunction(this.value)">0</button>
+                <button type="button" class="btn btn-outline-primary" value="/" onclick="buttonfunction(this.value)" aria-label="Division">/</button>
+            </div>
+        </form>
+    </div>
 
-        <script>
-            function buttonfunction(val) {
-                // Get the current display value
-                var currentDisplay = form.display.value;
-        
-                // Check if the last character in the display is an operator
-                var lastCharIsOperator = /[\+\-\*\/]$/.test(currentDisplay);
-        
-                // Check if the new value is an operator
-                var newValIsOperator = /[\+\-\*\/]/.test(val);
-        
-                // If the last character is an operator and the new value is also an operator, do not append
-                if (lastCharIsOperator && newValIsOperator) {
-                    // You can handle the error in any way you prefer; for now, let's just log a message
-                    console.error("Math error: Consecutive operators");
-                } else {
-                    // Append the value to the display
-                    form.display.value += val;
-                }
+    <script>
+        function buttonfunction(val) {
+            var currentDisplay = form.display.value;
+            var lastCharIsOperator = /[\+\-\*\/]$/.test(currentDisplay);
+            var newValIsOperator = /[\+\-\*\/]/.test(val);
+
+            if (lastCharIsOperator && newValIsOperator) {
+                console.error("Math error: Consecutive operators");
+            } else {
+                form.display.value += val;
             }
-        
-            function equal() {
-                // Evaluate the expression
-                try {
-                    form.display.value = eval(form.display.value);
-                } catch (error) {
-                    // Handle any errors that occur during evaluation
-                    console.error("Math error:", error.message);
-                }
+        }
+
+        function equal() {
+            try {
+                form.display.value = eval(form.display.value);
+            } catch (error) {
+                console.error("Math error:", error.message);
             }
-        
-            function clearScreen() {
-                // Clear the display
-                form.display.value = '';
+        }
+
+        function clearScreen() {
+            form.display.value = '';
+        }
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                equal();
             }
-        </script>
-        
-    </head>
-    <body>
-        <div align="center" class="calculator">
-            <form name="form">
-                <input type="text" name="display" class="form form-control" value="" placeholder="0" aria-live="assertive">
-                <div class="buttons">
-                    <button type="button" class="btn btn-outline-primary" value="1" onclick="buttonfunction(this.value)">1</button>
-                    <button type="button" class="btn btn-outline-primary" value="2" onclick="buttonfunction(this.value)">2</button>
-                    <button type="button" class="btn btn-outline-primary" value="3" onclick="buttonfunction(this.value)">3</button>
-                    <button type="button" class="btn btn-outline-primary" value="+" onclick="buttonfunction(this.value)" aria-label="Addition">+</button>
-                    <br>
-                    <button type="button" class="btn btn-outline-primary" value="4" onclick="buttonfunction(this.value)">4</button>
-                    <button type="button" class="btn btn-outline-primary" value="5" onclick="buttonfunction(this.value)">5</button>
-                    <button type="button" class="btn btn-outline-primary" value="6" onclick="buttonfunction(this.value)">6</button>
-                    <button type="button" class="btn btn-outline-primary" value="-" onclick="buttonfunction(this.value)">-</button>
-                    <br>
-                    <button type="button" class="btn btn-outline-primary" value="7" onclick="buttonfunction(this.value)">7</button>
-                    <button type="button" class="btn btn-outline-primary" value="8" onclick="buttonfunction(this.value)">8</button>
-                    <button type="button" class="btn btn-outline-primary" value="9" onclick="buttonfunction(this.value)">9</button>
-                    <button type="button" class="btn btn-outline-primary" value="*" onclick="buttonfunction(this.value)" aria-label="Multiplication">*</button>
-                    <br>
-                    <button type="button" class="btn btn-outline-primary" onclick="equal()" aria-label="Equals">=</button>
-                    <button type="button" class="btn btn-outline-primary" onclick="clearScreen()" aria-label="Clear">C</button>
-                    <button type="button" class="btn btn-outline-primary" value="0" onclick="buttonfunction(this.value)">0</button>
-                    <button type="button" class="btn btn-outline-primary" value="/" onclick="buttonfunction(this.value)" aria-label="Division">/</button>
-                </div>
-            </form>
-        </div>
-    </body>
+        });
+    </script>
+</body>
 </html>
