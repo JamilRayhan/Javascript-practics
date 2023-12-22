@@ -1,3 +1,3 @@
 document.getElementById('myButton').addEventListener('click', function() {
-    document.getElementById('giftImage').src ='/img/love-your-dog.gif' ;
+    document.getElementById('giftImage').src ='/Fun Project 1/img/love-your-dog.gif' ;
 });
